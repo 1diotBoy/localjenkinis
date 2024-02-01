@@ -11,10 +11,15 @@ if(!(jenkins.getSecurityRealm() instanceof HudsonPrivateSecurityRealm))
 if(!(jenkins.getAuthorizationStrategy() instanceof GlobalMatrixAuthorizationStrategy))
     jenkins.setAuthorizationStrategy(new GlobalMatrixAuthorizationStrategy())
 
-def user = jenkins.getSecurityRealm().createAccount(env.JENKINS_USER, env.JENKINS_PASS)
+def adminUser = env.JENKINS_USER ?: 'admin'
+
+def adminPass = env.JENKINS_PASS ?: 'Powerjenkins@2024'
+
+    
+def user = jenkins.getSecurityRealm().createAccount(adminUser, adminPass)
 user.save()
 
-jenkins.getAuthorizationStrategy().add(Jenkins.ADMINISTER, env.JENKINS_USER)
+jenkins.getAuthorizationStrategy().add(Jenkins.ADMINISTER, adminUser)
 
 jenkins.save()
 
