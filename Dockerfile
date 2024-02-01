@@ -1,4 +1,7 @@
 FROM jenkins/jenkins:2.426.1-jdk17
+ENV JENKINS_USER jenkinsadmin
+ENV JENKINS_PASS Powerjenkins@2024
+
 USER root
 
 COPY plugins.txt /usr/share
