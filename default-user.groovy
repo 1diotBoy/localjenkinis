@@ -28,7 +28,7 @@ def localCloud = new KubernetesCloud(
     null,
     '',
     'jenkins',
-    'http://jenkins.jenkins.svc.cluster.local:8080',
+    'http://jenkins.jenkins.svc.cluster.local:8080/jenkins',
     '10', 0, 0, 5
 )
 localCloud.setSkipTlsVerify(true)
