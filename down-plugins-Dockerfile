@@ -1,11 +1,11 @@
 FROM jenkins/jenkins:2.426.1-jdk17
-ENV JENKINS_USER admin
-ENV JENKINS_PASS Powerjenkins@2024
+ENV JENKINS_USER=admin
+ENV JENKINS_PASS=Powerjenkins@2024
 
 USER root
 
-COPY plugins.txt /usr/share
-COPY default-user.groovy  /usr/share/jenkins/ref/init.groovy.d/default-user.groovy
+COPY resources/plugins.txt /usr/share
+COPY resources/default-user.groovy  /usr/share/jenkins/ref/init.groovy.d/default-user.groovy
 
 RUN apt-get update && apt-get install -y lsb-release
 RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
@@ -18,5 +18,5 @@ RUN apt-get update && apt-get install -y sshpass zip unzip && apt-get clean
 
 USER jenkins
 RUN jenkins-plugin-cli -f /usr/share/plugins.txt
-COPY recover.sh /var/jenkins_home
-COPY backup.sh /var/jenkins_home
+COPY resources/recover.sh /var/jenkins_home
+COPY resources/backup.sh /var/jenkins_home
